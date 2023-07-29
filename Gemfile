@@ -11,3 +11,5 @@ gem "jekyll-default-layout"
 gem 'jekyll-seo-tag'
 
 gem  'jekyll-github-metadata'
+
+gem 'jekyll-mermaid'
