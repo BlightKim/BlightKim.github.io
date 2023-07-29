@@ -8,9 +8,4 @@ gem "just-the-docs", "0.5.4" # pinned to the current release
 
 gem "jekyll-default-layout"
 
-gem 'jekyll-seo-tag'
-
-gem  'jekyll-github-metadata'
-
-gem 'jekyll-mermaid'
 
