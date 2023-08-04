@@ -3,10 +3,10 @@ description: A starter template for a Jeykll site using the Just the Docs theme!
 theme: just the Docs
 baseurl: ""
 
-url: "https://blightkim.github.io"
+url: https://BlightKim.github.io/BlightKim.github.io
 
 aux_links:
-  Template Repository: BlightKim/BlightKim.github.io
+  Template Repository: https://github.com/BlightKim/BlightKim.github.io
 
 # By default, consuming the theme as a gem leaves mermaid disabled; it is opt-in
 mermaid:
