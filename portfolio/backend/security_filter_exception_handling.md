@@ -119,3 +119,4 @@ Filter에서 발생한 예외는 ControllerAdvice의 적용 범위 밖이기 때
 <img src="./image/security_filter_exception_handling/1691128260884.png" height="400px">
 
 ControllerAdvice와 동일하게 error 결과과 출력되는 것을 확인 할 수 있다.
+
