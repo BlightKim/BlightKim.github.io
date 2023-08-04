@@ -87,19 +87,3 @@ public class RedisConfig {
 | opsForHash  | Hash        |
 
 데이터를 저장할 때 만료 시간 지정할 시에는 해당 시간의 단위까지 지정해주면 된다. 위의 코드에서는 밀리 초(TimeUnit.MILLISECONDS)로 적용되어 있다.
-
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
-
-{: .important }
-
-> A paragraph
->
-> Another paragraph
->
-> The last paragraph
