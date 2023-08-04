@@ -2,7 +2,7 @@
 layout: default
 title: 코딩테스트 연습 - 카운트 업
 date: 2023-08-03
-parent: 포트폴리오 정리
+parent: 코딩테스트 연습
 tags: []
 ---
 

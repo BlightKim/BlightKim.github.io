@@ -2,7 +2,7 @@
 title: Refresh 토큰과 레디스 템플릿 사용
 layout: default
 
-parent: 포트폴리오 정리
+parent: 포트폴리오
 ---
 
 # Redis를 사용하게 된 계기
