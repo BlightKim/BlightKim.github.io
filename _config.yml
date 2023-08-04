@@ -5,7 +5,7 @@ theme: blightk의 코딩저장소
 url: https://just-the-docs.github.io
 
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  Template Repository: https://github.com/BlightKim/BlightKim.github.io
 
 # By default, consuming the theme as a gem leaves mermaid disabled; it is opt-in
 mermaid:
