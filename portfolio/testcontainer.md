@@ -1,9 +1,6 @@
 ---
+title: Default layout child page
 layout: default
-title: 테스트 컨테이너
-date: 2023-07-30 19:38
-tags: []
-summary:
 parent: 포트폴리오
 ---
 
