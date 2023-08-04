@@ -88,9 +88,9 @@ class RedisTest {
 
   @Test
   public void test() {
-    redisService.setData("세빈", "수진", 1000 * 60 * 600L);
-    String value = redisService.getDate("세빈");
-    Assertions.assertThat(value).isEqualTo("수진");
+    redisService.setData("asd123@naver.com", "1wqd2-asdw21-sadwqdq", 1000 * 60 * 600L);
+    String value = redisService.getDate("asd123@naver.com");
+    Assertions.assertThat(value).isEqualTo("1wqd2-asdw21-sadwqdq");
   }
 }
 ```
