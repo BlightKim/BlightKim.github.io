@@ -92,5 +92,5 @@ class RedisTest {
     String value = redisService.getDate("asd123@naver.com");
     Assertions.assertThat(value).isEqualTo("1wqd2-asdw21-sadwqdq");
   }
-}
+} ㄷ
 ```
