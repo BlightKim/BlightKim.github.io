@@ -1,9 +1,13 @@
 ---
-title: Refresh 토큰과 레디스 템플릿 사용
+title: Redis를 활용해서 Refresh Token 구현하기
 layout: default
 parent: 백엔드
 grand_parent: 포트폴리오
 ---
+
+# Refresh Token(리프레시 토큰)이란 ?
+
+Access Token이 탈취 될 경우 악용 될 위험이 있다. 따라서 Access Token의 유효시간을 짧게 설정해준다. Access Token의 유효시간이 짧기 때문에 유효시간이 만료된다면 사용자는 다시 로그인 해야하는 번거로움이 있다. 이를 해소하기 위해 유효시간이 비교적 긴 Refresh Token을 발급하고, Access Token이 만료되었다면 Refresh Token의 조회 결과에 따라 Access Token을 다시 발급하게 된다.
 
 # Redis를 사용하게 된 계기
 
