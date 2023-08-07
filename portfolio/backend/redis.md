@@ -167,8 +167,7 @@ public class RedisServiceImpl implements RedisService {
 의존관계와 테스트코드는 다음과 같다
 
 ```mermaid
-classDiagram
-
+graph TD;
 RedisServiceImpl <|.. RedisService <..TokenProvider
 
 ```
