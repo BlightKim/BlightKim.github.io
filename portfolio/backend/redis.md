@@ -91,3 +91,191 @@ public class RedisConfig {
 | opsForHash  | Hash        |
 
 데이터를 저장할 때 만료 시간 지정할 시에는 해당 시간의 단위까지 지정해주면 된다. 위의 코드에서는 밀리 초(TimeUnit.MILLISECONDS)로 적용되어 있다.
+
+TestContainer를 통해 Redis 컨테이너를 실행시켜 테스트와 로컬환경을 격리했다.
+
+![1691384343239](image/redis/1691384343239.png)
+
+Docker Desktop에 컨테이너가 실행되고 종료되는 모습을 확인할 수 있다.
+
+![1691384393405](image/redis/1691384393405.png)
+
+테스트 로그창에 Docker 컨테이너가 실행되고 종료되는 것을 확인 할 수 있다.
+
+이제 RedisService를 이용한 RefreshToken 테스트를 실행할 준비를 마쳤다.
+
+먼저 RedisService를 살펴보자.
+
+```
+public interface RedisService {
+    public void setData(String key, String value, Long expiredTime); // 데이터를 저장한다
+
+    public String getData(String key); // 데이터를 조회한다
+
+    public void deleteData(String key); // 데이터를 삭제한다.
+}
+
+```
+
+RedisService를 구현한 RedisServiceImpl은 다음과 같다.
+
+```java
+package com.sebin.board.service;
+
+import io.jsonwebtoken.ExpiredJwtException;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class RedisServiceImpl implements RedisService {
+    private final RedisTemplate<String, Object> redisTemplate;
+
+    @Override
+    public void setData(String key, String value, Long expiredTime) {
+        // 데이터 저장
+        redisTemplate.opsForValue().set(key,value,expiredTime, TimeUnit.MICROSECONDS);
+    }
+
+    @Override
+    public String getData(String key) {
+        // 데이터 셀렉트 --> 반환은 스트링
+        String result = (String) redisTemplate.opsForValue().get(key);
+
+        if (result == null) {
+            throw new ExpiredJwtException(null, null, "토큰이 만료되었습니다.");
+        }
+        return result;
+    }
+
+    @Override
+    public void deleteData(String key) {
+        redisTemplate.delete(key);
+    }
+}
+
+```
+
+만약 유효시간이 만료되었다면 Refresh Token은 Redis에서 삭제한다. 따라서 조회 결과는 null이 되고 이 조회결과가 null일 경우 JwtExpiredException이 발생한다.
+
+의존관계와 테스트코드는 다음과 같다
+
+```mermaid
+classDiagram
+
+RedisServiceImpl <|.. RedisService <..TokenProvider
+
+```
+
+의존관계
+
+```java
+package com.sebin.board.jwt;
+
+import static com.mysema.commons.lang.Assert.assertThat;
+import static java.util.stream.Collectors.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
+import com.sebin.board.config.code.TestContainerConfig;
+import com.sebin.board.dto.MemberInfoDto;
+import com.sebin.board.dto.TokenDto;
+import com.sebin.board.reposiotry.queryrepository.MemberQueryRepository;
+import com.sebin.board.service.RedisService;
+import io.jsonwebtoken.ExpiredJwtException;
+import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+
+@SpringBootTest
+@Transactional
+@ExtendWith(TestContainerConfig.class)
+@Slf4j
+class TokenProviderTest extends TestContainerConfig {
+
+  private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 3; // 토큰 만료 테스트를 위한 시간 설정
+  private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 3; // 토큰 만료 테스트를 위한 시간 설정
+  @Autowired
+  RedisService redisService;
+  @Autowired
+  MemberQueryRepository memberQueryRepository;
+  @Autowired
+  private TokenProvider tokenProvider;
+
+  @Test
+  @DisplayName("refresh 토큰 검사 테스트")
+  @WithMockUser
+  void validateRefreshToken() throws InterruptedException {
+    // given
+    Authentication authentication = SecurityContextHolder.getContext()
+        .getAuthentication(); // MockUser 꺼내기
+    String authorities = authentication.getAuthorities().stream()
+        .map(GrantedAuthority::getAuthority).collect(joining(","));
+    long now = new Date().getTime();
+    Date refreshTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+    String refreshToken = tokenProvider.generateRefreshToken(authentication, REFRESH_TOKEN_EXPIRE_TIME);
+    redisService.setData(authentication.getName(), refreshToken,
+        refreshTokenExpiresIn.getTime()); // redis에 저장 만료시간은 3초로 설정
+
+    // when
+    String findRefreshToken = redisService.getData(authentication.getName());
+
+    // that
+    Assertions.assertThat(findRefreshToken).isEqualTo(refreshToken);
+  }
+
+  @Test
+  @DisplayName("refresh 토큰 만료 시 JwtExpiredException 던짐")
+  @WithMockUser
+  void throwJwtExpiredExceptionByExpirationOfRefreshToken() throws InterruptedException {
+    // given
+    Authentication authentication = SecurityContextHolder.getContext()
+        .getAuthentication(); // MockUser 꺼내기
+    String authorities = authentication.getAuthorities().stream()
+        .map(GrantedAuthority::getAuthority).collect(joining(","));
+    long now = new Date().getTime();
+    Date refreshTokenExpiresIn = new Date(now +REFRESH_TOKEN_EXPIRE_TIME);
+    String refreshToken = tokenProvider.generateRefreshToken(authentication, REFRESH_TOKEN_EXPIRE_TIME);
+    redisService.setData(authentication.getName(), refreshToken,
+        1000 * 1L); // redis에 저장 만료시간은 3초로 설정
+
+    // when
+    Thread.sleep(5000); // 5초 기다린다
+    ; // redis에서 조회한다.
+
+    // that
+    assertThatThrownBy(() -> redisService.getData(
+        authentication.getName()))
+        .isInstanceOf(ExpiredJwtException.class);// 만료시간이 경과되었으므로 redis에서 조회되지 않고 Exception 발생
+
+  }
+}
+```
+
+# 테스트 결과
+
+![1691385186937](image/redis/1691385186937.png)
+
+테스트가 정상적으로 실행되고 성공한 것을 확인할 수 있다.
