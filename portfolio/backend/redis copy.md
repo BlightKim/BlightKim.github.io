@@ -1,8 +1,8 @@
 ---
 title: Mockito를 활용한 단위테스트
 layout: default
-parent: 스프링부트 + 시큐리티 + 리액트를 이용한 블로그 만들기
-grand_parent: 백엔드
+parent: 백엔드
+grand_parent: 포트폴리오
 ---
 
 # Mockito란 ?
