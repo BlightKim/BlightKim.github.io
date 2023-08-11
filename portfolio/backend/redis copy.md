@@ -46,8 +46,8 @@ class AuthServiceTest {
 ```
 
 {: .important }
-> A paragraph
+> 1. @Mock {: .label } : Mockito.mock(MemberService.class) 을 간단하게 애노테이션으로 만들 수 있다.
 >
-> Another paragraph
+> 1. @ExtendWith(MockitoExtension.class) : @Mock 애노테이션을 처리해주는 확장 모델이다.
 >
 > The last paragraph
