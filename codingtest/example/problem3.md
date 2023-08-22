@@ -14,12 +14,6 @@ parent: 코딩테스트 연습
 
 # 나의 풀이
 ```java
-
-```
-
-
-# 풀이
-```java
 import java.util.*;
 import java.util.Scanner;
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 5. 숫자만 추출
+title: 5. 문자거리
 parent: 코딩테스트 연습
 ---
 # 문제
