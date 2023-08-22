@@ -1,7 +1,7 @@
 ---
 layout: default
 title: DDD(도메인 주도 개발)_1.전략 디자인
-
+parent: DDD(도메인 주도 개발)
 ---
 
 # 비즈니스 도메인 분석
@@ -13,25 +13,32 @@ title: DDD(도메인 주도 개발)_1.전략 디자인
 
 # 비즈니스 도메인의 정의
 
-A business domain defines a company’s main area of activity. Generally speaking, it’s the service the company provides to its clients. For example:
-
-서브 도메인이란 ?
-
-To achieve its business domain’s goals and targets, a company has to operate in multiple subdomains.
-A subdomain is a fine-grained area of business activity.
+> 비즈니스 도메인은 회사의 주요 활동 영역을 정한다.
 
 
-코어 서브도메인이란 ? 
+# 서브 도메인이란 ?
 
-A core subdomain is what a company does differently from its competitors.
-예시 : Let’s take Uber as an example. Initially, the company provided a novel form of transportation: ridesharing. As its competitors caught up, Uber found ways to optimize and evolve its core business: for example, reducing costs by matching riders heading in the same direction.
+> 비즈니스 도메인의 목표를 달성하기 위해, 여러 서브 도메인이 필요하다.
+>
+> 서브도메인은 사업의 미세한 영역이다.
 
-It’s important to note that core subdomains are not necessarily technical.
 
-Generic subdomains ? 이란 ?
+# 코어(핵심) 서브도메인이란 ? 
+> 핵심 서브도메인은 회사가 경쟁업체와 차별화를 두고 수행하는 영역이다.
+{: .highlight}
+> 우버는 처음 교통 서비스, 라이드 쉐어링 서비스만을 제공했다.
+>
+> 경쟁업체가 성장하면서, 우버는 같은 방향으로 가는 승객들을 매칭하고 비용을 줄였다. 
+>
+> 핵심 비즈니스를 최적화하고 발전시켰다.
+>
+> 핵심 서브도메인은 반드시 기술적이지 않다는 것을 명심해야한다.
 
-Generic subdomains are business activities that all companies are performing in the same way.
-
-차이는 ? However, generic subdomains do not provide any competitive edge for the company.
-
-예시 : For example, most systems need to authenticate and authorize their users. Instead of inventing a proprietary authentication mechanism, it makes more sense to use an existing solution.
+# 일반 서브도메인이란 ?
+> 일반 서브도메인은 모든 회사가 같은 방식으로 수행하는 비즈니스 활동이다.
+>
+> 일반 서브도메인이 경쟁력을 가져다 주지 않는다.
+{: .highlight}
+> 대부분의 시스템은 사용자를 인증하고 권한을 부여한다.
+>
+> 독자적인 인증 대신 기존 방법을 유지하는 것이 효율적이다.
