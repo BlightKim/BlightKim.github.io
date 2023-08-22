@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 유효한 팰린드롬
+title: 3. 유효한 팰린드롬
 parent: 코딩테스트 연습
 ---
 # 문제
