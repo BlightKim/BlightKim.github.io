@@ -17,6 +17,7 @@ parent: 코딩테스트 연습
 
 
 # 풀이 1
+```java
 import java.util.Scanner;
 
 class Main {
