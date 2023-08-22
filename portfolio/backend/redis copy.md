@@ -48,3 +48,15 @@ class AuthServiceTest {
 1. @Mock {: .label } : Mockito.mock(MemberService.class) 을 간단하게 애노테이션으로 만들 수 있다.
 
 1. @ExtendWith {: .label} (MockitoExtension.class) : @Mock 애노테이션을 처리해주는 확장 모델이다.
+ 
+
+----
+
+# Stubbing 조작하는 법
+- 리턴 타입이 객체 이면, null 을 리턴한다.
+- 리턴 타입이 Optional 이면, Optional.empty() 를 리턴한다.
+- 리턴 타입이 primitive 타입이면, 기본 Primitive 값 을 리턴한다. (int 는 0, boolean은 false)
+- 리턴 타입이 콜렉션 이면, 비어있는 콜렉션 을 리턴한다.
+- 리턴 타입이 void 면, 예외를 던지지 않고 아무런 일도 발생하지 않는다.
+
+### 1. return 있는 메소드 테스
