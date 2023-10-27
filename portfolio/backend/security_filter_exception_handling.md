@@ -2,7 +2,7 @@
 title: Spring security에서 exception 처리하기
 layout: default
 parent: 백엔드
-grand_parent: 포트폴리오
+grand_parent: 공부 기록
 ---
 
 # 문제 원인

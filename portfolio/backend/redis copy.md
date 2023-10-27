@@ -2,7 +2,7 @@
 title: Mockito를 활용한 단위테스트
 layout: default
 parent: 백엔드
-grand_parent: 포트폴리오
+grand_parent: 공부 기록
 ---
 
 # Mockito란 ?

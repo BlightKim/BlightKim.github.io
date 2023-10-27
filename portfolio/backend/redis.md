@@ -2,7 +2,7 @@
 title: Redis를 활용해서 Refresh Token 구현하기
 layout: default
 parent: 백엔드
-grand_parent: 포트폴리오
+grand_parent: 공부 기록
 ---
 
 # Refresh Token(리프레시 토큰)이란 ?

@@ -2,7 +2,7 @@
 title: 테스트컨테이너
 layout: default
 parent: 백엔드
-grand_parent: 포트폴리오
+grand_parent: 공부 기록
 ---
 
 # 테스트 컨테이너 구축 배경
