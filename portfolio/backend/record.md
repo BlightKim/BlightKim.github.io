@@ -94,5 +94,5 @@ public record OpenApiConfiguration(String version, String title, String descript
 {: .important-title }
 > 결론
 >
-> Entity를 제외한 불변 데이터 객체를 만들 때는 Record를 사용해보자  
-> 코드의 양이 획기적으로 줄어든다.
+> - Entity를 제외한 불변 데이터 객체를 만들 때는 Record를 사용해보자  
+> - 코드의 양이 획기적으로 줄어든다.
