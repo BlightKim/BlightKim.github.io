@@ -5,18 +5,17 @@ nav_order: 4.5
 has_children: true
 parent: 공부 기록
 ---
-# Record란 ?
+# Record란?
+
 > 스프링에서 Configuration Property를 설정하면서 Record에 대해 알게되어 정리해본다.  
 > Record는 불변 데이터를 보유하기 위한 특수한 종류의 클래스이며 java 14부터 추가되었다.  
 > 기존의 getter / setter가 뒤섞여 난잡해진 코드를 간결하게 만들 수 있다.  
-> Entity로 만들 수 있을 까 했지만 Entity는 프록시 등을 생성해야 하므로 Entity로 만들 수 없다
-  
+> Entity로 만들 수 있을 까 했지만 Entity는 프록시 등을 생성해야 하므로 Entity로 만들 수 없다 
 ---
-
 # 비교
 - Record 미사용
-  
-```java
+
+```
 package se.magnus.microservices.composite.product.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -73,7 +72,7 @@ public class OpenApiConfiguration {
 - Record 사용
   
 
-```java
+```
 package se.magnus.microservices.composite.product.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
