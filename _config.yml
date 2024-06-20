@@ -5,8 +5,23 @@ baseurl: ""
 
 url: https://BlightKim.github.io/BlightKim.github.io
 
+# 오른쪽 상단 탐색을 위한 보조 링크
 aux_links:
   Template Repository: https://github.com/BlightKim/BlightKim.github.io
+
+# 사이드/모바일 메뉴를 전역적으로 활성화 또는 비활성화
+# 페이지 변수나 최소 레이아웃을 사용하여 탐색 메뉴를 선택적으로 활성화 또는 비활성화할 수도 있습니다.
+nav_enabled: true
+
+# 보조 링크를 새 탭에서 열리게 합니다. 기본값은 false입니다.
+aux_links_new_tab: false
+
+# 제목 앵커 링크는 페이지 콘텐츠의 h1-h6 태그 위로 마우스를 가져가면 나타납니다
+# 사용자가 페이지의 특정 제목에 깊은 링크를 걸 수 있도록 합니다.
+#
+# true (기본값) 또는 false 지원
+heading_anchors: true
+
 
 # By default, consuming the theme as a gem leaves mermaid disabled; it is opt-in
 mermaid:
@@ -22,22 +37,68 @@ mermaid:
   # path: "/assets/js/mermaid.min.js"
   # Note: copy both `mermaid.esm.min.mjs` (v10+) or `mermaid.min.js` (<v10) and the associated `.map` file from the specified version of `mermaid/dist` to `/assets/js/`.
 
-callouts_level: quiet # or loud
+callouts_level: quiet # 또는 loud (알림 수준 설정)
 callouts:
-  highlight:
-    color: yellow
-  important:
-    title: Important
-    color: blue
-  new:
-    title: New
-    color: green
-  note:
-    title: Note
-    color: purple
-  warning:
-    title: Warning
-    color: red
+  highlight: # 강조 알림
+    color: yellow # 색상: 노란색
+  important: # 중요한 알림
+    title: Important # 제목: 중요
+    color: blue # 색상: 파란색
+  new: # 새로운 알림
+    title: New # 제목: 새로움
+    color: green # 색상: 초록색
+  note: # 참고 알림
+    title: Note # 제목: 참고
+    color: purple # 색상: 보라색
+  warning: # 경고 알림
+    title: Warning # 제목: 경고
+    color: red # 색상: 빨간색
+
+# 사이트 검색 활성화 또는 비활성화
+# true (기본값) 또는 false 지원
+search_enabled: true
+
+search:
+  # 페이지를 개별적으로 검색할 수 있는 섹션으로 분할
+  # 1 - 6 지원, 기본값: 2
+  heading_level: 2
+  # 검색 결과당 최대 미리보기 개수
+  # 기본값: 3
+  previews: 3
+  # 미리보기에서 일치하는 단어 전에 표시할 최대 단어 수
+  # 기본값: 5
+  preview_words_before: 5
+  # 미리보기에서 일치하는 단어 이후에 표시할 최대 단어 수
+  # 기본값: 10
+  preview_words_after: 10
+  # 검색 토큰 구분자 설정
+  # 기본값: /[\s\-/]+/
+  # 예시: 하이픈으로 연결된 검색어 지원 활성화
+  tokenizer_separator: /[\s/]+/
+  # 검색 결과에 상대 URL 표시
+  # true (기본값) 또는 false 지원
+  rel_url: true
+  # 모든 페이지의 오른쪽 하단에 표시되는 검색 버튼 활성화 또는 비활성화
+  # true 또는 false (기본값) 지원
+  button: false
+  # `ctrl + focus_shortcut_key` (macOS에서는 `cmd + focus_shortcut_key`)를 눌러 검색 입력 포커스
+  focus_shortcut_key: 'k'
+
+collections:
+  tests:
+    permalink: "/:collection/:path/"
+    output: true  # 'tests' 컬렉션의 출력 설정
+  tutorials:
+    permalink: "/:collection/:path/"
+    output: true  # 'tutorials' 컬렉션의 출력 설정
+
+just_the_docs:
+  collections:
+    tests:
+      name: Tests  # 'tests' 컬렉션의 이름
+    tutorials:
+      name: Tutorials  # 'tutorials' 컬렉션의 이름
+
 
 kramdown:
   syntax_highlighter_opts:
