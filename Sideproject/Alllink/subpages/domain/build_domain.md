@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Alllink
+title: 도메인 설계
 nav_order: 2
 parent: Alllink
 ---
