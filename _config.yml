@@ -37,6 +37,9 @@ mermaid:
   # path: "/assets/js/mermaid.min.js"
   # Note: copy both `mermaid.esm.min.mjs` (v10+) or `mermaid.min.js` (<v10) and the associated `.map` file from the specified version of `mermaid/dist` to `/assets/js/`.
 
+# 카피 버튼 활성화
+enable_copy_code_button: true
+
 callouts_level: quiet # 또는 loud (알림 수준 설정)
 callouts:
   highlight: # 강조 알림
