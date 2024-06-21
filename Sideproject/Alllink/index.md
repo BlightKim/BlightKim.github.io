@@ -2,7 +2,7 @@
 layout: default
 title: Alllink
 nav_order: 2
-parent: 사이드프로젝트
+parent: 사이드 프로젝트
 has_children: true
 ---
 # Alllink 
