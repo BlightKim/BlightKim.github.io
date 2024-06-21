@@ -1,5 +1,5 @@
 ---
-title: Layout
+title: 사이드프로젝트
 layout: default
 nav_order: 4.5
 has_children: true
