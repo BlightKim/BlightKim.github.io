@@ -3,6 +3,7 @@ layout: default
 title: 도메인 설계
 nav_order: 2
 parent: Alllink
+grand_parent: 사이드 프로젝트
 ---
 # 현재 상황
 {: .fs-9 }
