@@ -43,6 +43,24 @@ return new Point(x, y);
 ```
 
 > 코드 정리 커밋과 동작 변경 커밋은 분리해야 함
+---
+# 설명하는 상수
+### 상징적인 상수를 만들어라
+- 좋지 않은 예시
+```java
+if response.code = 404
+    ...코드...
+```
+
+- 좋은 예시
+```java
+PAGE_NOT_FOUND := 404
+if response.code = PAGE_NOT_FOUND
+...코드...
+```
+
+{: .important }
+> 그러나 빈약한 의미를 가진 상수는 도움이 되지 않는다
 
 
 
