@@ -49,8 +49,6 @@ classDiagram
 Fruit o-- Color
 Fruit: +Color color
 ```
-
 ---
-### 클래스의 관계
 
 
