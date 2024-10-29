@@ -1,5 +1,5 @@
 ---
-title: 보호구문
+title: tidy-first(1)
 layout: default
 parent: 리팩토링
 ---
