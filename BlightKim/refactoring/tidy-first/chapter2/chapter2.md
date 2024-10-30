@@ -46,13 +46,16 @@ return new Point(x, y);
 ---
 # 설명하는 상수
 ### 상징적인 상수를 만들어라
+
 - 좋지 않은 예시
+
 ```
 if response.code = 404
     ...코드...
 ```
 
 - 좋은 예시
+
 ```java
 PAGE_NOT_FOUND := 404
 if response.code = PAGE_NOT_FOUND
@@ -63,7 +66,9 @@ if response.code = PAGE_NOT_FOUND
 > 그러나 빈약한 의미를 가진 상수는 도움이 되지 않는다
 ---
 # 명시적인 매개변수
+
 - 명시적이지 않은 매개변수 전달 예시
+
 ```
 params = {a: 1, b: 2}
 foo(params)
@@ -72,6 +77,7 @@ function foo(params)
            ...params.a... ...params.b...
 ```
 - 명시적인 매개변수 전달
+
 ```
 function foo(params)
 foo_body(params.a, params.b)
