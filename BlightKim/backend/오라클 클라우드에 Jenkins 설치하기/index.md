@@ -58,4 +58,79 @@ OpenJDK 64-Bit Server VM Temurin-21.0.4+7 (build 21.0.4+7-LTS, mixed mode, shari
 
 정상적으로 자바가 설치되었다
 
-2. 
+2. 젠킨스를 설치한다
+
+```shell
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+sudo apt-get update
+
+sudo apt-get install jenkins
+```
+
+젠킨스의 포트를 변경한다
+
+```shell
+sudo vi /etc/default/jenkins
+```
+
+> HTTP_PORT=8081 
+>  
+> 이 부분을 변경한다
+
+```shell
+sudo systemctl restart jenkins.service
+```
+
+다시 시작해도 jenkins의 포트가 바뀌지 않았다
+
+한번 다른 방법을 사용해보자
+
+```shell
+sudo vi /etc/init.d/jenkins
+```
+
+```shell
+# 이 부분을 변경한다
+check_tcp_port "http" "${HTTP_PORT}" "8081" "${HTTP_HOST}" "0.0.0.0" || return 2
+```
+
+재시작을 해도 변경되지 않아서 아래 방법을 통해 해결되었다
+
+```shell
+sudo vi /usr/lib/systemd/system/jenkins.service
+
+# Port to listen on for HTTP requests. Set to -1 to disable.
+# To be able to listen on privileged ports (port numbers less than 1024),
+# add the CAP_NET_BIND_SERVICE capability to the AmbientCapabilities
+# directive below.
+# 변경하기
+Environment="JENKINS_PORT=8081"
+```
+
+```shell
+sudo systemctl daemon-reload
+sudo systemctl restart jenkins
+```
+
+재시작하고 확인해보니
+
+```shell
+● jenkins.service - Jenkins Continuous Integration Server
+     Loaded: loaded (/lib/systemd/system/jenkins.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2024-10-30 11:21:58 UTC; 3min 1s ago
+   Main PID: 4432 (java)
+      Tasks: 44 (limit: 14232)
+     Memory: 324.3M
+        CPU: 12.088s
+     CGroup: /system.slice/jenkins.service
+             └─4432 /usr/bin/java -Djava.awt.headless=true -jar /usr/share/java/jenkins.war --webroot=/var/cache/jenkins/war --httpPort=8081
+```
+
+정상적으로 포트번호가 `8081`로 변경된 것을 확인할 수 있다
+
