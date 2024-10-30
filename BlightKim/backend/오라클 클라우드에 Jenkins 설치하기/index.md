@@ -134,3 +134,24 @@ sudo systemctl restart jenkins
 
 정상적으로 포트번호가 `8081`로 변경된 것을 확인할 수 있다
 
+3. 젠킨스 포트 열어주기
+
+젠킨스에 접속하기 위해 젠킨스가 실행되고 있는 서버의 8081 포트를 열어준다
+
+![](./images/img.png)
+
+서버 내부의 방화벽도 열어준다
+
+```shell
+sudo iptables -I INPUT 4 -p tcp --dport 8081 -j ACCEPT
+
+sudo netfilter-persistent save
+```
+
+설정을 완료하고 젠킨스에 접속해보자
+
+
+![](./images/img_1.png)
+
+정상적으로 젠킨스에 접속되는 것을 확인할 수 있다
+
