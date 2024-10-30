@@ -1,6 +1,6 @@
 ---
 title: 도커 Mysql 데이터 영속적으로 저장하기
-parent: 디자인패턴
+parent: 백엔드
 layout: default
 nav_order: 4.5
 ---
