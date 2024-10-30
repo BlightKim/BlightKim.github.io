@@ -76,6 +76,7 @@ foo(params)
 function foo(params)
            ...params.a... ...params.b...
 ```
+
 - 명시적인 매개변수 전달
 
 ```
@@ -85,6 +86,7 @@ foo_body(params.a, params.b)
 function_foo(a, b)
   ...a... ...b...
 ```
+
 ---
 # 비슷한 코드끼리 분류
 ### 비슷한 코드가 구분이 될 때, 빈 줄 넣어 구분하라
