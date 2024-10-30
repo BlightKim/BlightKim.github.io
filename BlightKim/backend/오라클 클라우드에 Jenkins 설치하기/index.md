@@ -147,7 +147,7 @@ sudo iptables -I INPUT 4 -p tcp --dport 8081 -j ACCEPT
 
 sudo netfilter-persistent save
 ```
-
+ 
 설정을 완료하고 젠킨스에 접속해보자
 
 
