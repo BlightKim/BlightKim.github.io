@@ -31,12 +31,12 @@ parent: 리팩토링
 # 설명하는 변수
 
 - 좋지 않은 예시
-```java
+```
 return new Point(...긴 표현식..., ... 다른 표현식 ...);
 ```
 
 - 좋은 예시
-```java
+```
 x = ...긴 표현식...;
 y = ...다른 표현식...;
 return new Point(x, y);
@@ -47,7 +47,7 @@ return new Point(x, y);
 # 설명하는 상수
 ### 상징적인 상수를 만들어라
 - 좋지 않은 예시
-```java
+```
 if response.code = 404
     ...코드...
 ```
@@ -64,7 +64,7 @@ if response.code = PAGE_NOT_FOUND
 ---
 # 명시적인 매개변수
 - 명시적이지 않은 매개변수 전달 예시
-```ruby
+```
 params = {a: 1, b: 2}
 foo(params)
 
@@ -72,7 +72,7 @@ function foo(params)
            ...params.a... ...params.b...
 ```
 - 명시적인 매개변수 전달
-```ruby
+```
 function foo(params)
 foo_body(params.a, params.b)
 
