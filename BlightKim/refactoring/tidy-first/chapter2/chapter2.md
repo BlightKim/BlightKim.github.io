@@ -64,6 +64,7 @@ if response.code = PAGE_NOT_FOUND
 
 {: .important }
 > 그러나 빈약한 의미를 가진 상수는 도움이 되지 않는다
+
 ---
 # 명시적인 매개변수
 
