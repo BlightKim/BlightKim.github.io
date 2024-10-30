@@ -14,8 +14,8 @@ parent: 리팩토링
 > ```
 
 * 예시코드(리팩토링 전)
-```java
 
+```java
 public class QueueManager {
     private final Map<String, Queue<String>> queues = new HashMap<>();
 	private final Set<String> delayQueues = new HashSet<>();
