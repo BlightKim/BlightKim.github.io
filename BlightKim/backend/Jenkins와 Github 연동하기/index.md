@@ -49,19 +49,35 @@ pipeline {
     agent any
 
     stages {
-        steps {
-            git branch: 'develop', credentialsId: 'github-token', url: '[Github Repository 주소]'
+        stage('Checkout') {
+            steps {
+                git branch: 'develop', credentialsId: 'github-token', url: '[Github Repository 주소]'
+            }
         }
-        post {
-            // git clone 성공 이후 실행되는 항목
-            success {
-                echo '소스 코드를 성공적으로 가져왔습니다.'
-            }
-            // git clone 실패 이후 실행되는 항목
-            failure {
-                echo '소스 코드 가져오기에 실패했습니다.'
-            }
+    }
+
+    post {
+        // git clone 성공 이후 실행되는 항목
+        success {
+            echo '소스 코드를 성공적으로 가져왔습니다.'
+        }
+        // git clone 실패 이후 실행되는 항목
+        failure {
+            echo '소스 코드 가져오기에 실패했습니다.'
         }
     }
 }
 ```
+
+5. 테스트 
+
+아직 배포 관련하여 스크립트를 다 작성하지 못했다.
+
+간단하게 Github Repository에 push 할 때, Jenkins에서 clone하는지만 테스트 해보도록 한다
+
+
+6. 결과
+
+![img_6.png](./images/img_6.png)
+
+Jenkins / Github 연동이 완료되었다
