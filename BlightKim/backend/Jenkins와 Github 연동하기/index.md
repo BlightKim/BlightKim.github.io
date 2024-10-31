@@ -22,3 +22,4 @@ layout: default
 ![img_2.png](./images/img_2.png)
 
 2. Jenkins에 Github 토큰을 저장한다
+
