@@ -33,6 +33,8 @@ sudo docker buildx create --use
 sudo docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
 # 다중 아키텍처 이미지 빌드
-
-docker buildx build --platform linux/amd64,linux/arm64 -t [username]/[image_name]:[tag] . --push
+sudo docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/[소문자아이디]/[이미지 이름]:$(git rev-parse --short HEAD) . --push
 ```
+
+* `jenkins` 계정이 특정 경로에서 sudo docker 권한을 사용하게 하는법
+

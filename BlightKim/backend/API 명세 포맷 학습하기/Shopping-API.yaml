@@ -1,0 +1,126 @@
+openapi: "3.0.0"
+info:
+  title: Shopping API
+  version: "1.0"
+components:
+  schemas:
+    CreateReportRequest:
+      type: object
+      description: 신고 생성 시 전달 데이터
+      required:
+        - reference
+        - name
+        - price
+        - supplier
+      properties:
+        reference:
+          description: |
+            상품의 식별자
+          type: string
+        name:
+          type: string
+        price:
+          description: 가격(USD)
+          type: number
+        description:
+          type: string
+        supplier:
+          type: object
+          description: Product's supplier
+          required:
+            - reference
+            - name
+          properties:
+            reference:
+              type: string
+            name:
+              type: string
+paths:
+  /reports:
+    description: 상품 카탈로그
+    get:
+      summary: 상품 조회
+      description: |
+        카탈로그에서 비정형 질의 파라미터로
+        조회한 상품들
+      parameters:
+        - name: free-query #파라미터 이름
+          description: | # 파라미터 설명
+            상품의 이름(name), 참조값(reference) 또는
+            상품 설명의 일부(partial description)
+          in: query # 파라미터의 위치
+          required: false # 파라미터의 필수 여부
+          schema:
+            type: object # 이 스키마는 오브젝트를 설명
+            required: # 필수 속성 리스트
+              - reference
+              - name
+              - price
+              - supplier
+            properties: # 이 안에는 속성이 있음
+              reference: # 속성의 이름
+                type: string # 속성의 타입
+                description: 상품의 # 상품의 이름
+                example: ISBN-978888 # 속성 값의 예시
+              name: # 속성의 이름
+                type: string # 속성의 타입
+                example: The Design of Web APIs # 속성 값의 예시
+              price: # 속성의 이름
+                type: number # 속성의 타입
+                example: 44.99
+              description:
+                type: string
+                example: A book about API design # 속성 값의 예시
+              supplier: # 공급처 오브젝트 속성
+                type: object
+                description: Product's supplier
+                required: # 공급처의 필수 속성
+                  - reference
+                  - name
+                properties: # 공급처 속성에 대한 설명
+                  reference:
+                    type: string
+                    description: Supplier's unique identifier
+                    example: YOUNG
+                  name:
+                    type: string
+                    example: YoungJin
+
+      responses:
+        200:
+          description: 비정형 질의에 일치하는 상품들
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+
+    post:
+      summary: 신고 생성
+      description: 요청을 받아 신고 데이터를 생성한다
+      requestBody: # 바디 파라미터의 영역
+        description: 상품의 정보 # 바디 파라미터의 설명
+        content:
+          application:/json:
+            schema:
+              required:
+                - reportType
+                - reportReason
+                - supplierReference
+              properties:
+                reportType:
+                  type: string
+                reportReason:
+                  type: string
+                targetId:
+                  type: number
+                supplierReference:
+                  type: string
+
+
+      responses:
+        200:
+          description: 상품이 카탈로그에 추가되었음
+
+
+
+
